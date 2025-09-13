@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menggunakan Address List dan Filter Aplikasi Layer di MikroTik</title>
+    <style>
+
+/* Styling untuk container gambar */
+
+.image-container {
+  margin: 30px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+  max-width: 100%;
+  position: relative;
+}
+
+.image-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: all 0.4s ease;
+}
+
+.image-container:hover img {
+  filter: brightness(1.1);
+}
+
+.image-caption {
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7), transparent);
+  padding: 15px 20px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover .image-caption {
+  transform: translateY(0);
+}
+
+@keyframes loadProgress { 0% { width: 0%; } 100% { width: 100%; } }
+@keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+
+    /* Portfolio Button Styling */
+
+.portfolio-button {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 1000;
+background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+color: var(--text-primary);
+border: none;
+border-radius: 50px;
+padding: 15px 25px;
+font-family: 'Inter', sans-serif;
+font-weight: 600;
+font-size: 1rem;
+cursor: pointer;
+box-shadow: 0 5px 20px rgba(37, 99, 235, 0.4);
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: 10px;
+overflow: hidden;
+text-decoration: none;
+}
+.portfolio-button:hover {
+transform: translateY(-5px) scale(1.05);
+box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+}
+.portfolio-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg,
+transparent,
+rgba(255, 255, 255, 0.2),
+transparent);
+animation: shineEffect 3s infinite;
+}
+.portfolio-icon {
+font-size: 1.2rem;
+animation: pulse 2s infinite;
+}
+@keyframes shineEffect {
+0% { left: -100%; }
+20% { left: 100%; }
+100% { left: 100%; }
+}
+@keyframes pulse {
+0% { transform: scale(1); }
+50% { transform: scale(1.2); }
+100% { transform: scale(1); }
+}
+.attention-ripple {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 100%;
+height: 100%;
+border-radius: 50px;
+border: 2px solid var(--accent-color);
+animation: ripple 2s infinite;
+opacity: 0;
+}
+@keyframes ripple {
+0% {
+width: 100%;
+height: 100%;
+opacity: 0.8;
+}
+100% {
+width: 200%;
+height: 200%;
+opacity: 0;
+}
+}
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --accent-color: #06b6d4;
+    --success-color: #059669;
+    --warning-color: #d97706;
+    --danger-color: #dc2626;
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #334155;
+    --bg-light: #f8fafc;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #475569;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Tech Background Pattern */
+.tech-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 50%);
+}
+
+.circuit-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.03;
+    background-image: 
+        linear-gradient(90deg, var(--primary-color) 1px, transparent 1px),
+        linear-gradient(var(--primary-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: circuitMove 20s linear infinite;
+}
+
+@keyframes circuitMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* Floating particles */
+.tech-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    0% { 
+        transform: translateY(100vh) translateX(0px);
+        opacity: 0;
+    }
+    10% { 
+        opacity: 0.6;
+    }
+    90% { 
+        opacity: 0.6;
+    }
+    100% { 
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 100px 20px 80px;
+    background: linear-gradient(135deg, 
+        rgba(37, 99, 235, 0.1) 0%, 
+        rgba(6, 182, 212, 0.1) 50%, 
+        rgba(5, 150, 105, 0.1) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(37, 99, 235, 0.1),
+        transparent
+    );
+    animation: headerScan 10s linear infinite;
+}
+
+@keyframes headerScan {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.main-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--success-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    text-shadow: 0 0 50px rgba(37, 99, 235, 0.3);
+    animation: titleGlow 4s ease-in-out infinite alternate;
+    position: relative;
+}
+
+@keyframes titleGlow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.author-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: cardFloat 6s ease-in-out infinite alternate;
+}
+
+@keyframes cardFloat {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-10px); }
+}
+
+.card-header {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.author-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    text-align: left;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 80px;
+    margin-right: 15px;
+}
+
+.info-value {
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Section styling */
+.section {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 40px 0;
+    position: relative;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s ease;
+    animation: sectionSlide 0.8s ease-out;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.section:nth-child(even) {
+    animation: sectionSlideRight 0.8s ease-out;
+}
+
+@keyframes sectionSlide {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes sectionSlideRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.section:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 12px 48px rgba(37, 99, 235, 0.2);
+    transform: translateY(-8px);
+}
+
+.section-title {
+    font-family: 'Inter', sans-serif;
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+/* Sub-section titles */
+.subsection-title {
+    font-family: 'Inter', sans-serif;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.subsection-title::before {
+    content: '—'; /* Simple dash or similar indicator */
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+/* Code blocks with typing effect */
+.code-terminal {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+    font-family: 'JetBrains Mono', monospace;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.code-terminal::before {
+    content: '$ mikrotik@router:~';
+    color: var(--success-color);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.code-line {
+    color: var(--text-primary);
+    margin: 8px 0;
+    position: relative;
+    padding-left: 20px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    width: fit-content;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: pre;
+}
+
+.code-line.typing {
+    opacity: 1;
+    border-right: 2px solid var(--accent-color);
+    animation: blink-cursor 1s infinite;
+}
+
+.code-line.typed {
+    opacity: 1;
+    border-right: none;
+}
+
+@keyframes blink-cursor {
+    0%, 50% { border-color: var(--accent-color); }
+    51%, 100% { border-color: transparent; }
+}
+
+.code-line:hover {
+    background: rgba(37, 99, 235, 0.1);
+    padding-left: 25px;
+    border-radius: 6px;
+}
+
+.code-line::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+}
+
+.comment {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.string {
+    color: var(--warning-color);
+    font-weight: 400;
+}
+
+.keyword {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Alert boxes */
+.tech-alert {
+    background: linear-gradient(135deg, 
+        rgba(37, 99, 235, 0.1), 
+        rgba(6, 182, 212, 0.1));
+    border: 1px solid var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    position: relative;
+    animation: alertPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes alertPulse {
+    0% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.2); }
+    100% { box-shadow: 0 0 30px rgba(37, 99, 235, 0.4); }
+}
+
+.tech-alert::before {
+    content: '🔧 TEKNOLOGI INFO';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--bg-primary);
+    color: var(--primary-color);
+    padding: 5px 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+}
+
+.security-alert {
+    background: linear-gradient(135deg, 
+        rgba(220, 38, 38, 0.1), 
+        rgba(217, 119, 6, 0.1));
+    border: 1px solid var(--danger-color);
+    border-left: 4px solid var(--danger-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    position: relative;
+    animation: securityBlink 2s ease-in-out infinite alternate;
+}
+
+@keyframes securityBlink {
+    0% { border-left-color: var(--danger-color); }
+    100% { border-left-color: var(--warning-color); }
+}
+
+.security-alert::before {
+    content: '🛡 KEAMANAN';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--bg-primary);
+    color: var(--danger-color);
+    padding: 5px 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
+    border: 1px solid var(--danger-color);
+}
+
+.conclusion-box {
+    background: linear-gradient(135deg, 
+        rgba(5, 150, 105, 0.1), 
+        rgba(37, 99, 235, 0.1));
+    border: 1px solid var(--success-color);
+    border-left: 4px solid var(--success-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    position: relative;
+    animation: conclusionGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes conclusionGlow {
+    0% { box-shadow: 0 0 20px rgba(5, 150, 105, 0.2); }
+    100% { box-shadow: 0 0 30px rgba(5, 150, 105, 0.4); }
+}
+
+.conclusion-box::before {
+    content: '📝 KESIMPULAN';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--bg-primary);
+    color: var(--success-color);
+    padding: 5px 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
+    border: 1px solid var(--success-color);
+}
+
+/* Bibliography */
+.bibliography {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08), 
+        rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 60px;
+    backdrop-filter: blur(20px);
+    animation: biblioFade 1.5s ease-out;
+}
+
+@keyframes biblioFade {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bibliography h3 {
+    color: var(--accent-color);
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.bibliography ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.bibliography li {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 50px;
+}
+
+.bibliography li::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 1.2rem;
+}
+
+.bibliography li:hover {
+    color: var(--text-primary);
+    transform: translateX(10px);
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(6, 182, 212, 0.05));
+}
+
+.bibliography a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    word-break: break-all;
+}
+
+.bibliography a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* Progress bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--success-color));
+    z-index: 1000;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .section {
+        padding: 25px 20px;
+        margin: 30px 0;
+    }
+    
+    .container {
+        padding: 40px 15px;
+    }
+
+    .code-terminal {
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+
+    .author-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Smooth animations */
+.fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+
+img, a {
+-webkit-user-drag: none;
+-khtml-user-drag: none;
+-moz-user-drag: none;
+-o-user-drag: none;
+user-drag: none;
+}
+
+</style>
+
+
+
+
+
+
+<!-- Portfolio Button -->
+<a href="https://jovian-portofolio02.vercel.app/" target="_blank" class="portfolio-button">
+    <span class="portfolio-icon">🚀</span>
+    Lihat Portfolio Saya
+    <div class="attention-ripple"></div>
+</a>
+
+<!-- Tech Background -->
+<div class="tech-bg"></div>
+<div class="circuit-pattern"></div>
+<div class="tech-particles" id="techParticles"></div>
+
+<!-- Header -->
+<div class="header">
+    <h1 class="main-title">MIKROTIK ROUTEROS</h1>
+    <div class="subtitle">Menyeting Security Profile dan Enkripsi WPA2</div>
+    <div class="subtitle">Konfigurasi keamanan jaringan wireless dengan standar WPA2</div>
+    
+    <div class="author-card">
+        <div class="card-header">Informasi Penulis</div>
+        <div class="author-info">
+            <div class="info-item">
+                <span class="info-label">Penulis:</span>
+                <span class="info-value">Jovian Ekasakta</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Guru:</span>
+                <span class="info-value">Arief Wahyudin</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Kelas:</span>
+                <span class="info-value">XI TJKT 03</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Sekolah:</span>
+                <span class="info-value">Dwija Bhakti 01 Jombang</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Network Topology Section -->
+    <div class="section fade-in">
+        <h2 class="section-title">TOPOLOGI JARINGAN WIRELESS</h2>
+
+                                                        <div class="image-container">
+          <img src="topologi.png" alt="SERVICE IP pada MikroTik RouterOS">
+          <div class="image-caption">Tampilan topologi di gns3</div>
+        </div>
+        
+        <p>Topologi jaringan wireless menunjukkan bagaimana perangkat MikroTik terhubung dengan klien nirkabel. Konfigurasi security profile dan enkripsi WPA2 merupakan komponen penting untuk mengamankan jaringan nirkabel dari akses tidak sah.</p>
+        
+        <div class="tech-alert">
+            <p>Router MikroTik akan berfungsi sebagai Access Point (AP) yang menyediakan koneksi nirkabel terenkripsi bagi perangkat klien. Security profile menentukan parameter keamanan seperti metode autentikasi dan jenis enkripsi yang digunakan pada jaringan wireless.</p>
+        </div>
+        
+        <p>Berikut adalah komponen-komponen utama dalam topologi ini:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line"><span class="keyword">1. MikroTik Router</span></div>
+            <div class="code-line comment"># Berfungsi sebagai wireless access point dengan security profile WPA2.</div>
+            <div class="code-line"><span class="keyword">2. Klien Wireless</span> (Laptop, Smartphone, IoT devices)</div>
+            <div class="code-line comment"># Perangkat yang terhubung ke jaringan nirkabel melalui autentikasi WPA2.</div>
+            <div class="code-line"><span class="keyword">3. SSID (Service Set Identifier)</span></div>
+            <div class="code-line comment"># Nama jaringan nirkabel yang terlihat oleh perangkat klien.</div>
+        </div>
+        
+        <div class="security-alert">
+            <p>Konfigurasi security profile yang tepat sangat penting untuk mencegah serangan terhadap jaringan wireless. Menggunakan standar WPA2 dengan passphrase yang kuat adalah praktik keamanan dasar untuk melindungi jaringan Anda dari akses tidak sah.</p>
+        </div>
+    </div>
+
+    <!-- Section: Security Profile dan Standar WPA2 -->
+    <div class="section fade-in">
+        <h2 class="section-title">1. SECURITY PROFILE DAN STANDAR WPA2</h2>
+
+        <h3 class="subsection-title">Pengertian Security Profile pada MikroTik</h3>
+        <p>Dari sumber MikroTik Documentation (2024), Security Profile pada RouterOS adalah serangkaian konfigurasi keamanan yang diterapkan pada interface wireless untuk mengontrol bagaimana perangkat klien dapat terhubung dan mengakses jaringan. Security profile mencakup berbagai parameter seperti metode autentikasi, jenis enkripsi, dan kunci keamanan yang digunakan pada jaringan wireless.</p>
+        
+        <p>Dari sumber NetworkLessons (2023), Security Profile pada MikroTik berfungsi sebagai templat keamanan yang dapat diterapkan ke satu atau beberapa interface wireless. Ini memungkinkan administrator untuk mengelola keamanan jaringan nirkabel secara terpusat dan konsisten, terutama pada perangkat MikroTik dengan multiple wireless interface.</p>
+
+        <h3 class="subsection-title">Standar Enkripsi WPA2</h3>
+        <p>Dari sumber TechTarget (2024), WPA2 (Wi-Fi Protected Access 2) adalah standar keamanan wireless yang dikembangkan oleh Wi-Fi Alliance sebagai penerus WPA. WPA2 menggunakan algoritma enkripsi AES (Advanced Encryption Standard) yang jauh lebih kuat dibandingkan dengan TKIP yang digunakan pada WPA generasi pertama. Standar WPA2 resmi dirilis pada tahun 2004 dan menjadi mandatory pada semua perangkat bersertifikasi Wi-Fi sejak 2006.</p>
+        
+        <p>Dari sumber CBT Nuggets (2023), WPA2 mendukung dua mode utama: WPA2-Personal (WPA2-PSK) yang menggunakan pre-shared key dan cocok untuk jaringan rumah atau usaha kecil, serta WPA2-Enterprise yang menggunakan server RADIUS untuk autentikasi dan lebih cocok untuk lingkungan bisnis skala besar. WPA2 dengan AES-CCMP menawarkan keamanan yang sangat kuat dan telah menjadi standar industri selama bertahun-tahun sebelum kedatangan WPA3.</p>
+
+        <div class="conclusion-box">
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa Security Profile pada MikroTik adalah komponen konfigurasi keamanan yang penting untuk mengamankan jaringan wireless, sedangkan WPA2 adalah standar keamanan yang menggunakan enkripsi AES yang kuat untuk melindungi data pada jaringan nirkabel, tersedia dalam mode Personal (PSK) untuk implementasi sederhana dan Enterprise untuk lingkungan bisnis yang memerlukan keamanan tingkat tinggi.</p>
+        </div>
+    </div>
+
+    <!-- Section: Mengkonfigurasi Security Profile WPA2 -->
+    <div class="section fade-in">
+        <h2 class="section-title">2. MENGKONFIGURASI SECURITY PROFILE WPA2</h2>
+
+
+                                                        <div class="image-container">
+          <img src="no (1).png" alt="SERVICE IP pada MikroTik RouterOS">
+          <div class="image-caption">Tampilan topologi di gns3</div>
+        </div>
+
+        <h3 class="subsection-title">Membuat Security Profile WPA2 melalui CLI</h3>
+        <p>Dari sumber Garrett's Mindless Rambling (2022), untuk membuat security profile WPA2 di MikroTik melalui Command Line Interface (CLI), Anda dapat menggunakan perintah yang sederhana namun efektif. Berikut adalah langkah-langkah untuk membuat security profile WPA2-PSK melalui CLI:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line"><span class="keyword">/interface wireless security-profiles</span></div>
+            <div class="code-line"><span class="keyword">add</span> name=<span class="string">"profile-wpa2"</span> authentication-types=<span class="string">wpa2-psk</span> mode=<span class="string">dynamic-keys</span> wpa2-pre-shared-key=<span class="string">"password123"</span></div>
+            <div class="code-line comment"># Membuat security profile bernama "profile-wpa2" dengan autentikasi WPA2-PSK</div>
+        </div>
+        
+        <p>Dari sumber ShellHacks (2022), untuk konfigurasi yang lebih lengkap dengan dukungan kompatibilitas yang lebih baik, Anda dapat menambahkan parameter tambahan. Pendekatan yang direkomendasikan adalah sebagai berikut:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line"><span class="keyword">/interface wireless security-profiles</span></div>
+            <div class="code-line"><span class="keyword">add</span> name=<span class="string">"secure-wifi"</span> authentication-types=<span class="string">wpa2-psk</span> mode=<span class="string">dynamic-keys</span></div>
+            <div class="code-line">    unicast-ciphers=<span class="string">aes-ccm</span> group-ciphers=<span class="string">aes-ccm</span> wpa2-pre-shared-key=<span class="string">"StrongPassw0rd!"</span></div>
+            <div class="code-line comment"># Membuat security profile dengan pengaturan cipher yang eksplisit untuk keamanan yang lebih baik</div>
+        </div>
+
+        <h3 class="subsection-title">Membuat Security Profile WPA2 melalui Winbox</h3>
+        <p>Dari sumber Go Wireless NZ (2023), cara paling mudah untuk membuat security profile WPA2 pada MikroTik adalah menggunakan antarmuka grafis Winbox. Langkah-langkahnya adalah sebagai berikut:</p>
+        
+        <ol>
+            <li>Buka Winbox dan hubungkan ke router MikroTik Anda</li>
+            <li>Buka menu <strong>Wireless</strong> dari sidebar</li>
+            <li>Pilih tab <strong>Security Profiles</strong></li>
+            <li>Klik tombol + (plus) untuk menambahkan profile baru</li>
+            <li>Isi kolom <strong>Name</strong> dengan nama profile (misalnya "profile-wpa2")</li>
+            <li>Pilih <strong>dynamic-keys</strong> pada Mode</li>
+            <li>Centang <strong>WPA2 PSK</strong> pada Authentication Types</li>
+            <li>Masukkan password pada kolom <strong>WPA2 Pre-Shared Key</strong></li>
+            <li>Klik <strong>OK</strong> untuk menyimpan</li>
+        </ol>
+        
+        <p>Dari sumber MikroTik Wiki (2024), untuk keamanan optimal, pastikan bahwa parameter tambahan seperti berikut diatur dengan benar pada security profile:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line"><span class="keyword">/interface wireless security-profiles</span></div>
+            <div class="code-line"><span class="keyword">print detail</span></div>
+            <div class="code-line comment"># Melihat detail lengkap security profile yang ada</div>
+            <div class="code-line">Flags: * - default</div>
+            <div class="code-line"> 0 * name="default" mode=dynamic-keys authentication-types=wpa-psk,wpa2-psk</div>
+            <div class="code-line">     unicast-ciphers=aes-ccm,tkip group-ciphers=aes-ccm,tkip</div>
+            <div class="code-line">     wpa-pre-shared-key="12345678" wpa2-pre-shared-key="12345678"</div>
+            <div class="code-line">     group-key-update=5m</div>
+            <div class="code-line"></div>
+            <div class="code-line"> 1   name="profile-wpa2" mode=dynamic-keys authentication-types=wpa2-psk</div>
+            <div class="code-line">     unicast-ciphers=aes-ccm group-ciphers=aes-ccm</div>
+            <div class="code-line">     wpa2-pre-shared-key="StrongPassw0rd!"</div>
+            <div class="code-line">     group-key-update=5m management-protection=allowed</div>
+        </div>
+
+        <div class="tech-alert">
+            <p>Pastikan untuk menggunakan password yang kuat untuk WPA2 Pre-Shared Key. Password sebaiknya memiliki minimal 12 karakter dengan kombinasi huruf besar, huruf kecil, angka, dan karakter khusus untuk mencegah serangan brute force.</p>
+        </div>
+
+        <div class="conclusion-box">
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa pembuatan security profile WPA2 pada MikroTik dapat dilakukan melalui CLI maupun antarmuka grafis Winbox, dengan memperhatikan parameter-parameter penting seperti mode, authentication-types, dan cipher yang digunakan. Penggunaan mode dynamic-keys dengan authentication-types wpa2-psk dan cipher aes-ccm (AES) memberikan tingkat keamanan yang optimal untuk jaringan wireless.</p>
+        </div>
+    </div>
+
+    <!-- Section: Menerapkan Security Profile ke Interface Wireless -->
+    <div class="section fade-in">
+        <h2 class="section-title">3. MENERAPKAN SECURITY PROFILE KE INTERFACE WIRELESS</h2>
+
+                                                                <div class="image-container">
+          <img src="no (3).png" alt="SERVICE IP pada MikroTik RouterOS">
+          <div class="image-caption">Tampilan topologi di gns3</div>
+        </div>
+
+        <h3 class="subsection-title">Konfigurasi Interface Wireless melalui CLI</h3>
+        <p>Dari sumber MikroTik Documentation (2024), setelah membuat security profile, langkah selanjutnya adalah menerapkannya ke interface wireless. Berikut adalah perintah CLI untuk mengkonfigurasi dan menerapkan security profile WPA2 ke interface wireless:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line"><span class="keyword">/interface wireless</span></div>
+            <div class="code-line"><span class="keyword">set</span> wlan1 mode=<span class="string">ap-bridge</span> ssid=<span class="string">"MikroTik-Secure"</span> band=<span class="string">2ghz-b/g/n</span></div>
+            <div class="code-line">    channel-width=<span class="string">20/40mhz-Ce</span> frequency=<span class="string">auto</span> security-profile=<span class="string">"profile-wpa2"</span></div>
+            <div class="code-line"><span class="keyword">enable</span> wlan1</div>
+            <div class="code-line comment"># Mengkonfigurasi wlan1 sebagai access point dengan security profile "profile-wpa2"</div>
+        </div>
+        
+        <p>Dari sumber RouterOS First Time Configuration (2023), untuk memastikan pengaturan interface wireless telah diterapkan dengan benar, Anda dapat menggunakan perintah berikut untuk memeriksa konfigurasi:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line"><span class="keyword">/interface wireless print</span></div>
+            <div class="code-line comment"># Menampilkan konfigurasi semua interface wireless</div>
+            <div class="code-line">Flags: X - disabled, R - running</div>
+            <div class="code-line"> 0  R name="wlan1" mtu=1500 mac-address=D4:CA:6D:XX:XX:XX arp=enabled</div>
+            <div class="code-line">      interface-type=Atheros AR9300 mode=ap-bridge ssid="MikroTik-Secure"</div>
+            <div class="code-line">      frequency=2412 band=2ghz-b/g/n channel-width=20/40mhz-Ce</div>
+            <div class="code-line">      security-profile="profile-wpa2" radio-name="MikroTik"</div>
+            <div class="code-line">      wps-mode=disabled</div>
+        </div>
+
+        <h3 class="subsection-title">Menerapkan Security Profile melalui Winbox</h3>
+        <p>Dari sumber ShellHacks (2022), untuk menerapkan security profile ke interface wireless menggunakan Winbox, ikuti langkah-langkah berikut:</p>
+        
+        <ol>
+            <li>Buka Winbox dan hubungkan ke router MikroTik</li>
+            <li>Buka menu <strong>Wireless</strong> dari sidebar</li>
+            <li>Pilih tab <strong>Interfaces</strong></li>
+            <li>Double-klik pada interface wireless yang ingin dikonfigurasi (misalnya wlan1)</li>
+            <li>Pada tab <strong>Wireless</strong>, atur parameter berikut:
+                <ul>
+                    <li>Mode: <strong>ap bridge</strong></li>
+                    <li>SSID: <strong>MikroTik-Secure</strong> (atau nama jaringan yang diinginkan)</li>
+                    <li>Band: <strong>2GHz-B/G/N</strong> (sesuaikan dengan hardware)</li>
+                    <li>Channel Width: <strong>20/40MHz Ce</strong></li>
+                </ul>
+            </li>
+            <li>Pada dropdown <strong>Security Profile</strong>, pilih profile WPA2 yang telah dibuat sebelumnya</li>
+            <li>Klik <strong>OK</strong> untuk menyimpan perubahan</li>
+            <li>Kembali ke daftar interface, pastikan interface wireless telah diaktifkan (tidak ada tanda X)</li>
+        </ol>
+        
+        <p>Dari sumber NetworkWorld (2023), untuk memverifikasi bahwa konfigurasi wireless dan security profile telah diterapkan dengan benar, Anda dapat menggunakan menu Registration di Winbox untuk melihat klien yang terhubung:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line"><span class="keyword">/interface wireless registration-table print</span></div>
+            <div class="code-line comment"># Menampilkan daftar klien yang terhubung ke wireless interface</div>
+            <div class="code-line"># INTERFACE RADIO-NAME MAC-ADDRESS AP SIGNAL-STRENGTH TX-RATE</div>
+            <div class="code-line">0 wlan1 client1 F4:B7:E2:XX:XX:XX no -62dBm 65.0Mbps</div>
+        </div>
+
+        <div class="security-alert">
+            <p>Pastikan untuk memantau registration-table secara berkala untuk mendeteksi adanya koneksi yang tidak dikenal. Pengguna yang tidak sah mungkin dapat terhubung jika password terlalu lemah atau jika keamanan jaringan telah dikompromikan.</p>
+        </div>
+
+        <div class="conclusion-box">
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa penerapan security profile WPA2 ke interface wireless merupakan langkah penting dalam mengamankan jaringan nirkabel. Konfigurasi dapat dilakukan melalui CLI atau Winbox dengan memperhatikan parameter seperti mode, band, channel width, dan SSID. Pemantauan registration-table membantu administrator dalam memverifikasi bahwa hanya perangkat yang sah yang terhubung ke jaringan.</p>
+        </div>
+    </div>
+
+    <!-- Section: Pengujian dan Praktik Keamanan Terbaik -->
+    <div class="section fade-in">
+        <h2 class="section-title">4. PENGUJIAN DAN PRAKTIK KEAMANAN TERBAIK</h2>
+
+                                                        <div class="image-container">
+          <img src="no (2).png" alt="SERVICE IP pada MikroTik RouterOS">
+          <div class="image-caption">Tampilan topologi di gns3</div>
+        </div>
+
+        <h3 class="subsection-title">Pengujian Konfigurasi WPA2</h3>
+        <p>Dari sumber TechTarget (2024), pengujian konfigurasi WPA2 adalah langkah penting untuk memastikan bahwa keamanan jaringan wireless berfungsi dengan baik. Beberapa metode pengujian meliputi:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line comment"># 1. Cek status konfigurasi security profile</div>
+            <div class="code-line"><span class="keyword">/interface wireless security-profiles print</span></div>
+            <div class="code-line"></div>
+            <div class="code-line comment"># 2. Verifikasi penerapan security profile ke interface</div>
+            <div class="code-line"><span class="keyword">/interface wireless print</span></div>
+            <div class="code-line"></div>
+            <div class="code-line comment"># 3. Coba koneksi dari perangkat klien dan verifikasi enkripsi</div>
+            <div class="code-line"><span class="keyword">/interface wireless registration-table print</span></div>
+            <div class="code-line"></div>
+            <div class="code-line comment"># 4. Memeriksa log untuk peristiwa autentikasi</div>
+            <div class="code-line"><span class="keyword">/log print where topics~"wireless"</span></div>
+        </div>
+        
+        <p>Dari sumber MikroTik Forum (2022), pengujian keamanan WPA2 sebaiknya juga mencakup pemeriksaan terhadap potensi kelemahan. Beberapa pengujian tambahan meliputi:</p>
+
+        <div class="code-terminal">
+            <div class="code-line comment"># 5. Verifikasi kekuatan sinyal dan interferensi channel</div>
+            <div class="code-line"><span class="keyword">/interface wireless scan</span></div>
+            <div class="code-line"></div>
+            <div class="code-line comment"># 6. Periksa aktivitas mencurigakan pada registration-table</div>
+            <div class="code-line"><span class="keyword">/interface wireless registration-table print stats</span></div>
+            <div class="code-line"></div>
+            <div class="code-line comment"># 7. Cek traffic interface wireless untuk deteksi anomali</div>
+            <div class="code-line"><span class="keyword">/interface monitor-traffic wlan1 once</span></div>
+        </div>
+
+        <h3 class="subsection-title">Praktik Keamanan Terbaik untuk WPA2</h3>
+        <p>Dari sumber Meraki Documentation (2020), berikut adalah beberapa praktik keamanan terbaik untuk konfigurasi WPA2 pada jaringan wireless MikroTik:</p>
+        
+        <ol>
+            <li>Gunakan password yang kuat dan panjang (minimal 12 karakter) dengan kombinasi huruf, angka, dan simbol</li>
+            <li>Aktifkan management-protection untuk mencegah serangan deauthentication</li>
+            <li>Gunakan unicast-ciphers dan group-ciphers aes-ccm saja, hindari penggunaan TKIP</li>
+            <li>Perbarui firmware MikroTik secara teratur untuk mendapatkan perbaikan keamanan terbaru</li>
+            <li>Atur group-key-update ke nilai yang tepat (default 5 menit sudah baik)</li>
+        </ol>
+        
+        <div class="code-terminal">
+            <div class="code-line comment"># Contoh konfigurasi security profile dengan praktik terbaik</div>
+            <div class="code-line"><span class="keyword">/interface wireless security-profiles</span></div>
+            <div class="code-line"><span class="keyword">add</span> name=<span class="string">"best-practice"</span> mode=<span class="string">dynamic-keys</span> authentication-types=<span class="string">wpa2-psk</span></div>
+            <div class="code-line">    unicast-ciphers=<span class="string">aes-ccm</span> group-ciphers=<span class="string">aes-ccm</span></div>
+            <div class="code-line">    wpa2-pre-shared-key=<span class="string">"V3ryStr0ngP@ssw0rd!"</span> group-key-update=<span class="string">5m</span></div>
+            <div class="code-line">    management-protection=<span class="string">required</span> wps-mode=<span class="string">disabled</span></div>
+        </div>
+        
+        <p>Dari sumber Strong.eu Blog (2023), pada jaringan modern, pertimbangkan untuk menggunakan mode transisi WPA2/WPA3 jika perangkat mendukung, untuk memperoleh keamanan yang lebih baik sambil mempertahankan kompatibilitas dengan perangkat lama:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line comment"># Konfigurasi untuk mode transisi WPA2/WPA3 pada RouterOS v7+</div>
+            <div class="code-line"><span class="keyword">/interface wireless security-profiles</span></div>
+            <div class="code-line"><span class="keyword">add</span> name=<span class="string">"transition-mode"</span> mode=<span class="string">dynamic-keys</span> </div>
+            <div class="code-line">    authentication-types=<span class="string">wpa2-psk,wpa3-psk</span> </div>
+            <div class="code-line">    unicast-ciphers=<span class="string">aes-ccm</span> group-ciphers=<span class="string">aes-ccm</span></div>
+            <div class="code-line">    wpa2-pre-shared-key=<span class="string">"V3ryStr0ngP@ssw0rd!"</span> </div>
+            <div class="code-line">    wpa3-pre-shared-key=<span class="string">"V3ryStr0ngP@ssw0rd!"</span></div>
+            <div class="code-line">    management-protection=<span class="string">required</span> wps-mode=<span class="string">disabled</span></div>
+        </div>
+
+        <div class="tech-alert">
+            <p>Untuk RouterOS versi 7 ke atas, konfigurasi wireless pada wifiwave2 package menggunakan sintaks yang sedikit berbeda. Metode autentikasi dan enkripsi dikonfigurasi menggunakan path /interface/wifi/security/ dengan parameter seperti authentication-types, encryption, dan passphrase.</p>
+        </div>
+
+        <div class="security-alert">
+            <p>Meskipun WPA2 masih cukup aman jika dikonfigurasi dengan benar, namun WPA2 memiliki kelemahan seperti kerentanan KRACK (Key Reinstallation Attack). Pertimbangkan untuk beralih ke WPA3 jika perangkat klien Anda mendukungnya, terutama untuk jaringan yang menangani data sensitif.</p>
+        </div>
+
+        <div class="conclusion-box">
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa pengujian dan penerapan praktik keamanan terbaik merupakan langkah penting dalam mengamankan jaringan wireless dengan WPA2. Pengujian harus mencakup verifikasi konfigurasi, pemeriksaan koneksi klien, dan pemantauan aktivitas jaringan. Praktik terbaik meliputi penggunaan password yang kuat, enkripsi AES, perlindungan manajemen, dan pembaruan firmware secara teratur, serta pertimbangan untuk beralih ke mode transisi WPA2/WPA3 jika perangkat mendukung.</p>
+        </div>
+    </div>
+
+    <!-- Bibliography -->
+    <div class="bibliography">
+        <h3>DAFTAR PUSTAKA</h3>
+        <ul>
+            <li><strong>MikroTik Documentation.</strong> 2024. <em>WiFi Security Configuration - RouterOS</em>. <a href="https://help.mikrotik.com/docs/spaces/ROS/pages/224559120/WiFi" target="_blank">https://help.mikrotik.com/docs/spaces/ROS/pages/224559120/WiFi</a>. Diakses pada 12 September 2025, pukul 08:15 WIB.</li>
+            
+            <li><strong>NetworkLessons.</strong> 2023. <em>MikroTik Wireless Security Configuration</em>. <a href="https://networklessons.com/mikrotik/mikrotik-wireless-security-configuration" target="_blank">https://networklessons.com/mikrotik/mikrotik-wireless-security-configuration</a>. Diakses pada 12 September 2025, pukul 08:45 WIB.</li>
+            
+            <li><strong>TechTarget.</strong> 2024. <em>Understanding Wireless Encryption: WEP, WPA, WPA2 and WPA3</em>. <a href="https://www.techtarget.com/searchnetworking/feature/Wireless-encryption-basics-Understanding-WEP-WPA-and-WPA2" target="_blank">https://www.techtarget.com/searchnetworking/feature/Wireless-encryption-basics-Understanding-WEP-WPA-and-WPA2</a>. Diakses pada 12 September 2025, pukul 09:20 WIB.</li>
+            
+            <li><strong>CBT Nuggets.</strong> 2023. <em>What are Encryption Standards? WPA & WPA2</em>. <a href="https://www.cbtnuggets.com/blog/technology/security/what-are-encryption-standards-WPA-WPA2" target="_blank">https://www.cbtnuggets.com/blog/technology/security/what-are-encryption-standards-WPA-WPA2</a>. Diakses pada 12 September 2025, pukul 09:55 WIB.</li>
+
+            <li><strong>Garrett's Mindless Rambling.</strong> 2022. <em>MikroTik Wireless Security WPA/WPA2 Profile</em>. <a href="https://grohler.com/mikrotik-wireless-security-wpa-wpa2-profile/" target="_blank">https://grohler.com/mikrotik-wireless-security-wpa-wpa2-profile/</a>. Diakses pada 12 September 2025, pukul 10:30 WIB.</li>
+
+            <li><strong>ShellHacks.</strong> 2022. <em>MikroTik: WiFi Configuration - Simple Setup</em>. <a href="https://www.shellhacks.com/mikrotik-wifi-configuration-simple-setup/" target="_blank">https://www.shellhacks.com/mikrotik-wifi-configuration-simple-setup/</a>. Diakses pada 12 September 2025, pukul 11:05 WIB.</li>
+
+            <li><strong>Go Wireless NZ.</strong> 2023. <em>Configuring a MikroTik router from start to finish</em>. <a href="https://help.gowifi.co.nz/support/solutions/articles/48001077268-beginners-guide-to-configuring-a-mikrotik-router-from-start-to-finish" target="_blank">https://help.gowifi.co.nz/support/solutions/articles/48001077268-beginners-guide-to-configuring-a-mikrotik-router-from-start-to-finish</a>. Diakses pada 12 September 2025, pukul 11:40 WIB.</li>
+
+            <li><strong>MikroTik Wiki.</strong> 2024. <em>Manual:Interface/Wireless</em>. <a href="https://wiki.mikrotik.com/wiki/Manual:Interface/Wireless" target="_blank">https://wiki.mikrotik.com/wiki/Manual:Interface/Wireless</a>. Diakses pada 12 September 2025, pukul 12:15 WIB.</li>
+
+            <li><strong>RouterOS First Time Configuration.</strong> 2023. <em>First Time Configuration - RouterOS</em>. <a href="https://help.mikrotik.com/docs/spaces/ROS/pages/328151/First+Time+Configuration" target="_blank">https://help.mikrotik.com/docs/spaces/ROS/pages/328151/First+Time+Configuration</a>. Diakses pada 12 September 2025, pukul 12:50 WIB.</li>
+
+            <li><strong>NetworkWorld.</strong> 2023. <em>Understanding Wireless Network Security</em>. <a href="https://www.networkworld.com/article/3584543/understanding-wireless-network-security.html" target="_blank">https://www.networkworld.com/article/3584543/understanding-wireless-network-security.html</a>. Diakses pada 12 September 2025, pukul 13:25 WIB.</li>
+            
+            <li><strong>MikroTik Forum.</strong> 2022. <em>Wifi Wave2 - best practice reg. configuration</em>. <a href="https://forum.mikrotik.com/viewtopic.php?t=184496" target="_blank">https://forum.mikrotik.com/viewtopic.php?t=184496</a>. Diakses pada 12 September 2025, pukul 14:00 WIB.</li>
+            
+            <li><strong>Meraki Documentation.</strong> 2020. <em>WPA3 Encryption and Configuration Guide</em>. <a href="https://documentation.meraki.com/MR/Wi-Fi_Basics_and_Best_Practices/WPA3_Encryption_and_Configuration_Guide" target="_blank">https://documentation.meraki.com/MR/Wi-Fi_Basics_and_Best_Practices/WPA3_Encryption_and_Configuration_Guide</a>. Diakses pada 12 September 2025, pukul 14:35 WIB.</li>
+            
+            <li><strong>Strong.eu Blog.</strong> 2023. <em>WPA, WPA2, WPA3: What Are the Differences Between Wi-Fi Security Standards?</em>. <a href="https://www.strong-eu.com/blog/wpa-wpa2-wpa3-what-are-the-differences-between-wi-fi-security-standards" target="_blank">https://www.strong-eu.com/blog/wpa-wpa2-wpa3-what-are-the-differences-between-wi-fi-security-standards</a>. Diakses pada 12 September 2025, pukul 15:10 WIB.</li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    // Tech particles animation
+    function createTechParticles() {
+        const particlesContainer = document.getElementById('techParticles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+    // Scroll progress
+    function updateScrollProgress() {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = (scrollTop / scrollHeight) * 100;
+        document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+    }
+
+    // Typing effect for code lines
+    function typeText(element, text, speed = 30) {
+        return new Promise(resolve => {
+            element.classList.add('typing');
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent = text.slice(0, i + 1);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.classList.remove('typing');
+                    element.classList.add('typed');
+                    resolve();
+                }
+            }
+            type();
+        });
+    }
+    
+    async function animateCodeBlock(terminal) {
+        const codeLines = terminal.querySelectorAll('.code-line:not(.typed)');
+        for (const line of codeLines) {
+            const originalHTML = line.innerHTML;
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = originalHTML;
+            const textContent = tempDiv.textContent || tempDiv.innerText || '';
+            
+            // Clear the line content, but keep child spans for styling
+            const children = Array.from(line.childNodes).map(child => child.cloneNode(true));
+            line.innerHTML = '';
+            
+            await typeText(line, textContent, 20);
+            
+            // Restore original HTML with spans
+            line.innerHTML = originalHTML;
+            line.classList.add('typed');
+        }
+    }
+
+    // Animate code blocks with typing effect
+    function setupCodeBlockObserver() {
+        const codeTerminals = document.querySelectorAll('.code-terminal');
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const terminal = entry.target;
+                    // For already typed lines, just show them
+                    terminal.querySelectorAll('.code-line.typed').forEach(line => line.style.opacity = '1');
+                    
+                    animateCodeBlock(terminal);
+                    obs.unobserve(terminal); // Animate only once
+                }
+            });
+        }, { threshold: 0.3 });
+
+        codeTerminals.forEach(terminal => {
+            observer.observe(terminal);
+        });
+    }
+
+    // Fade in animation on scroll
+    function animateOnScroll() {
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+
+    // Section hover effects
+    function addSectionEffects() {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.addEventListener('mouseenter', () => {
+                section.style.transform = 'translateY(-8px)';
+            });
+            section.addEventListener('mouseleave', () => {
+                section.style.transform = 'translateY(0)';
+            });
+        });
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+        createTechParticles();
+        animateOnScroll();
+        setupCodeBlockObserver();
+        addSectionEffects();
+        
+        // Scroll events
+        window.addEventListener('scroll', updateScrollProgress);
+        
+        // Smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+    });
+
+    // Add responsive particle count
+    function adjustParticleCount() {
+        const width = window.innerWidth;
+        const particlesContainer = document.getElementById('techParticles');
+        const currentParticles = particlesContainer.children.length;
+        const targetParticles = width < 768 ? 20 : width < 1200 ? 35 : 50;
+        
+        if (currentParticles !== targetParticles) {
+            particlesContainer.innerHTML = '';
+            for (let i = 0; i < targetParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+    }
+
+    window.addEventListener('resize', adjustParticleCount);
+
+    // Anti-Copy JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        // Mencegah seleksi teks
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Mencegah penyalinan teks (Ctrl+C)
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            // Opsional: Tampilkan pesan
+            alert('Maaf, penyalinan konten pada halaman ini tidak diizinkan!');
+            return false;
+        });
+
+        // Mencegah pemotongan teks (Ctrl+X)
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Mencegah penempelan teks (Ctrl+V)
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Mencegah klik kanan
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Mencegah drag & drop
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    });
+
+</script>
+
+</body>
+</html>
