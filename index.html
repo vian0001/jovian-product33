@@ -804,93 +804,122 @@ user-drag: none;
     <div class="section fade-in">
         <h2 class="section-title">TOPOLOGI JARINGAN WIRELESS</h2>
 
-                                                        <div class="image-container">
-          <img src="topologi.png" alt="SERVICE IP pada MikroTik RouterOS">
-          <div class="image-caption">Tampilan topologi di gns3</div>
+        <div class="image-container">
+            <img src="topologi.png" alt="SERVICE IP pada MikroTik RouterOS">
+            <div class="image-caption">Tampilan topologi di gns3</div>
         </div>
         
-        <p>Topologi jaringan wireless menunjukkan bagaimana perangkat MikroTik terhubung dengan klien nirkabel. Konfigurasi security profile dan enkripsi WPA2 merupakan komponen penting untuk mengamankan jaringan nirkabel dari akses tidak sah.</p>
+        <p>Dari sumber MikroTik Documentation (2024), topologi jaringan wireless adalah struktur dimana perangkat MikroTik berfungsi sebagai access point (AP) yang memberikan konektivitas internet secara nirkabel kepada perangkat klien. Topologi ini menjadi dasar untuk mengimplementasikan keamanan wireless melalui konfigurasi security profile dan enkripsi WPA2.</p>
+        
+        <p>Dari sumber NetworkLessons (2023), keberhasilan implementasi jaringan wireless yang aman bergantung pada pemahaman tentang komponen-komponen utama dalam topologi, termasuk access point, klien, dan protokol enkripsi yang digunakan. Keamanan jaringan wireless menjadi sangat penting untuk mencegah akses tidak sah dan melindungi data yang ditransmisikan.</p>
         
         <div class="tech-alert">
             <p>Router MikroTik akan berfungsi sebagai Access Point (AP) yang menyediakan koneksi nirkabel terenkripsi bagi perangkat klien. Security profile menentukan parameter keamanan seperti metode autentikasi dan jenis enkripsi yang digunakan pada jaringan wireless.</p>
         </div>
         
-        <p>Berikut adalah komponen-komponen utama dalam topologi ini:</p>
-        
-        <div class="code-terminal">
-            <div class="code-line"><span class="keyword">1. MikroTik Router</span></div>
-            <div class="code-line comment"># Berfungsi sebagai wireless access point dengan security profile WPA2.</div>
-            <div class="code-line"><span class="keyword">2. Klien Wireless</span> (Laptop, Smartphone, IoT devices)</div>
-            <div class="code-line comment"># Perangkat yang terhubung ke jaringan nirkabel melalui autentikasi WPA2.</div>
-            <div class="code-line"><span class="keyword">3. SSID (Service Set Identifier)</span></div>
-            <div class="code-line comment"># Nama jaringan nirkabel yang terlihat oleh perangkat klien.</div>
-        </div>
-        
         <div class="security-alert">
             <p>Konfigurasi security profile yang tepat sangat penting untuk mencegah serangan terhadap jaringan wireless. Menggunakan standar WPA2 dengan passphrase yang kuat adalah praktik keamanan dasar untuk melindungi jaringan Anda dari akses tidak sah.</p>
         </div>
-    </div>
-
-    <!-- Section: Security Profile dan Standar WPA2 -->
-    <div class="section fade-in">
-        <h2 class="section-title">1. SECURITY PROFILE DAN STANDAR WPA2</h2>
-
-        <h3 class="subsection-title">Pengertian Security Profile pada MikroTik</h3>
-        <p>Dari sumber MikroTik Documentation (2024), Security Profile pada RouterOS adalah serangkaian konfigurasi keamanan yang diterapkan pada interface wireless untuk mengontrol bagaimana perangkat klien dapat terhubung dan mengakses jaringan. Security profile mencakup berbagai parameter seperti metode autentikasi, jenis enkripsi, dan kunci keamanan yang digunakan pada jaringan wireless.</p>
         
-        <p>Dari sumber NetworkLessons (2023), Security Profile pada MikroTik berfungsi sebagai templat keamanan yang dapat diterapkan ke satu atau beberapa interface wireless. Ini memungkinkan administrator untuk mengelola keamanan jaringan nirkabel secara terpusat dan konsisten, terutama pada perangkat MikroTik dengan multiple wireless interface.</p>
-
-        <h3 class="subsection-title">Standar Enkripsi WPA2</h3>
-        <p>Dari sumber TechTarget (2024), WPA2 (Wi-Fi Protected Access 2) adalah standar keamanan wireless yang dikembangkan oleh Wi-Fi Alliance sebagai penerus WPA. WPA2 menggunakan algoritma enkripsi AES (Advanced Encryption Standard) yang jauh lebih kuat dibandingkan dengan TKIP yang digunakan pada WPA generasi pertama. Standar WPA2 resmi dirilis pada tahun 2004 dan menjadi mandatory pada semua perangkat bersertifikasi Wi-Fi sejak 2006.</p>
-        
-        <p>Dari sumber CBT Nuggets (2023), WPA2 mendukung dua mode utama: WPA2-Personal (WPA2-PSK) yang menggunakan pre-shared key dan cocok untuk jaringan rumah atau usaha kecil, serta WPA2-Enterprise yang menggunakan server RADIUS untuk autentikasi dan lebih cocok untuk lingkungan bisnis skala besar. WPA2 dengan AES-CCMP menawarkan keamanan yang sangat kuat dan telah menjadi standar industri selama bertahun-tahun sebelum kedatangan WPA3.</p>
-
         <div class="conclusion-box">
-            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa Security Profile pada MikroTik adalah komponen konfigurasi keamanan yang penting untuk mengamankan jaringan wireless, sedangkan WPA2 adalah standar keamanan yang menggunakan enkripsi AES yang kuat untuk melindungi data pada jaringan nirkabel, tersedia dalam mode Personal (PSK) untuk implementasi sederhana dan Enterprise untuk lingkungan bisnis yang memerlukan keamanan tingkat tinggi.</p>
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa memahami topologi jaringan wireless dan komponen-komponennya merupakan langkah awal yang penting dalam membangun jaringan wireless yang aman. Konfigurasi security profile dan enkripsi WPA2 pada MikroTik akan menjadi fokus utama untuk mengamankan jaringan dari ancaman keamanan.</p>
         </div>
     </div>
 
-    <!-- Section: Mengkonfigurasi Security Profile WPA2 -->
+    <!-- Section: Jenis-Jenis Enkripsi Wireless -->
     <div class="section fade-in">
-        <h2 class="section-title">2. MENGKONFIGURASI SECURITY PROFILE WPA2</h2>
+        <h2 class="section-title">1. JENIS-JENIS ENKRIPSI WIRELESS</h2>
 
-
-                                                        <div class="image-container">
-          <img src="no (1).png" alt="SERVICE IP pada MikroTik RouterOS">
-          <div class="image-caption">Tampilan topologi di gns3</div>
+        <div class="image-container">
+            <img src="no (1).png" alt="Perbandingan Jenis Enkripsi Wireless">
+            <div class="image-caption">Perbandingan jenis enkripsi wireless</div>
         </div>
 
-        <h3 class="subsection-title">Membuat Security Profile WPA2 melalui Winbox (Step-by-step)</h3>
-        <p>Berikut adalah panduan langkah demi langkah menggunakan Winbox untuk membuat Security Profile WPA2 — tidak menggunakan CLI. Ikuti setiap langkah pada antarmuka Winbox.</p>
+        <h3 class="subsection-title">WEP (Wired Equivalent Privacy)</h3>
+        <p>Dari sumber TechTarget (2024), WEP adalah standar enkripsi wireless pertama yang diperkenalkan pada tahun 1999 sebagai bagian dari standar IEEE 802.11. WEP menggunakan algoritma RC4 dengan kunci statis 64-bit atau 128-bit. WEP dirancang untuk memberikan tingkat keamanan yang setara dengan jaringan kabel, tetapi memiliki kelemahan signifikan dalam implementasinya.</p>
+        
+        <p>Dari sumber CBT Nuggets (2023), WEP memiliki kelemahan serius dalam cara mengelola kunci enkripsi dan initialization vectors (IV). Serangan statistik dapat memecahkan enkripsi WEP hanya dalam beberapa menit menggunakan tools yang tersedia secara umum. WEP dianggap tidak aman sejak tahun 2001 dan telah sepenuhnya tidak direkomendasikan oleh Wi-Fi Alliance sejak 2004.</p>
 
-        <div class="code-terminal">
-            <div class="code-line comment"># Langkah-langkah melalui Winbox untuk membuat security profile WPA2</div>
-            <div class="code-line">1. Buka Winbox dan hubungkan ke router MikroTik (masukkan MAC atau IP, klik <strong>Connect</strong>).</div>
-            <div class="code-line">2. Pada jendela Winbox, pilih menu <strong>Wireless</strong> di sidebar.</div>
-            <div class="code-line">3. Klik tab <strong>Security Profiles</strong>.</div>
-            <div class="code-line">4. Klik tombol <strong>+</strong> (Add) untuk menambahkan profile baru.</div>
-            <div class="code-line">5. Pada kolom <strong>Name</strong>, isi: <em>profile-wpa2</em> (atau nama yang diinginkan).</div>
-            <div class="code-line">6. Pada <strong>Mode</strong>, pilih <em>dynamic-keys</em>.</div>
-            <div class="code-line">7. Pada <strong>Authentication Types</strong>, centang <em>WPA2 PSK</em>.</div>
-            <div class="code-line">8. Masukkan password pada kolom <strong>WPA2 Pre-Shared Key</strong> (contoh: <em>StrongPassw0rd!</em>) — ganti dengan passphrase yang kuat.</div>
-            <div class="code-line">9. Pada bagian cipher, atur <strong>Unicast Ciphers</strong> = <em>aes-ccm</em> dan <strong>Group Ciphers</strong> = <em>aes-ccm</em>.</div>
-            <div class="code-line">10. Atur <strong>Group Key Update</strong> jika perlu (mis. <em>5m</em>), dan <strong>Management Protection</strong> = <em>allowed</em> atau <em>required</em>.</div>
-            <div class="code-line">11. Klik <strong>OK</strong> untuk menyimpan security profile baru.</div>
+        <h3 class="subsection-title">WPA (Wi-Fi Protected Access)</h3>
+        <p>Dari sumber MikroTik Wiki (2024), WPA dikembangkan sebagai solusi interim untuk mengatasi kelemahan WEP. WPA menggunakan Temporal Key Integrity Protocol (TKIP) yang memiliki beberapa peningkatan seperti message integrity check dan key mixing function untuk mengatasi kelemahan WEP. WPA juga memperkenalkan dua mode operasi: Personal (WPA-PSK) yang menggunakan pre-shared key, dan Enterprise (WPA-Enterprise) yang menggunakan server autentikasi RADIUS.</p>
+        
+        <p>Dari sumber NetworkWorld (2023), meskipun WPA menawarkan peningkatan keamanan dibandingkan WEP, TKIP pada dasarnya adalah "wrapper" sekitar algoritma RC4 yang sama dan masih rentan terhadap beberapa bentuk serangan. WPA dianggap sebagai solusi sementara sambil menunggu pengembangan WPA2 yang lebih kuat.</p>
+
+        <h3 class="subsection-title">WPA2 (Wi-Fi Protected Access 2)</h3>
+        <p>Dari sumber Strong.eu Blog (2023), WPA2 adalah peningkatan signifikan dari WPA yang dirilis pada tahun 2004. Perbedaan utama adalah penggunaan Advanced Encryption Standard (AES) melalui protokol Counter Mode with Cipher Block Chaining Message Authentication Code Protocol (CCMP). AES-CCMP memberikan enkripsi yang jauh lebih kuat dan aman dibandingkan TKIP pada WPA. WPA2 menjadi standar mandatory untuk semua perangkat bersertifikasi Wi-Fi sejak 2006.</p>
+        
+        <p>Dari sumber Meraki Documentation (2020), WPA2 juga tersedia dalam dua mode: WPA2-Personal (menggunakan PSK) dan WPA2-Enterprise (menggunakan 802.1X/EAP dengan server RADIUS). WPA2-Enterprise memberikan keamanan tertinggi karena menggunakan kredensial individu untuk setiap pengguna dan mampu melakukan manajemen kunci yang lebih baik. Meskipun WPA2 umumnya aman, kerentanan Key Reinstallation Attack (KRACK) ditemukan pada tahun 2017 yang mempengaruhi sebagian besar implementasi WPA2.</p>
+
+        <h3 class="subsection-title">WPA3 (Wi-Fi Protected Access 3)</h3>
+        <p>Dari sumber Go Wireless NZ (2023), WPA3 adalah standar keamanan wireless terbaru yang diperkenalkan oleh Wi-Fi Alliance pada tahun 2018. WPA3 mengatasi kelemahan WPA2 dengan meningkatkan keamanan PSK melalui Simultaneous Authentication of Equals (SAE), yang memberikan perlindungan yang jauh lebih baik terhadap serangan brute-force dan dictionary attack. WPA3 juga menambahkan Perfect Forward Secrecy, yang berarti bahwa meskipun kunci enkripsi berhasil diretas, komunikasi masa lalu tetap aman.</p>
+        
+        <p>Dari sumber MikroTik Forum (2022), WPA3 Personal cocok untuk jaringan rumah dan bisnis kecil, sementara WPA3 Enterprise menawarkan enkripsi setara 192-bit yang memenuhi standar keamanan untuk lingkungan yang membutuhkan kepatuhan tingkat tinggi seperti pemerintahan dan keuangan. RouterOS versi terbaru mendukung WPA3, tetapi kompatibilitas dengan perangkat lama mungkin menjadi masalah, sehingga mode transisi WPA2/WPA3 sering digunakan dalam implementasi praktis.</p>
+
+        <div class="conclusion-box">
+            <p>Dari pendapat-pendapat tersebut dapat disimpulkan bahwa evolusi standar enkripsi wireless menunjukkan peningkatan keamanan yang signifikan, dari WEP yang sudah tidak aman, WPA sebagai solusi sementara, WPA2 yang menjadi standar industri selama bertahun-tahun dengan enkripsi AES yang kuat, hingga WPA3 yang menawarkan perlindungan terbaik saat ini. Untuk sebagian besar penerapan saat ini, WPA2 dengan AES masih menjadi pilihan standar yang seimbang antara keamanan dan kompatibilitas, sementara WPA3 direkomendasikan jika perangkat klien mendukungnya.</p>
+        </div>
+    </div>
+
+    <!-- Section: Mengkonfigurasi Security Profile WPA2 dengan Winbox -->
+    <div class="section fade-in">
+        <h2 class="section-title">2. MENGKONFIGURASI SECURITY PROFILE WPA2 DENGAN WINBOX</h2>
+
+        <div class="image-container">
+            <img src="no (3).png" alt="Membuat Security Profile di Winbox">
+            <div class="image-caption">Tampilan menu Security Profiles di Winbox</div>
+        </div>
+
+        <h3 class="subsection-title">Membuka Winbox dan Mengakses Menu Wireless</h3>
+        <p>Dari sumber Go Wireless NZ (2023), langkah pertama dalam mengonfigurasi keamanan wireless MikroTik adalah dengan membuka aplikasi Winbox dan terhubung ke router. Winbox menawarkan antarmuka grafis yang intuitif dan merupakan metode yang direkomendasikan untuk konfigurasi MikroTik dibandingkan dengan Command Line Interface (CLI). Untuk mengakses pengaturan wireless, Anda perlu membuka menu Wireless yang terletak di sidebar kiri Winbox.</p>
+        
+        <div class="tech-alert">
+            <p>Winbox adalah aplikasi konfigurasi MikroTik berbasis Windows yang dapat diunduh dari situs resmi MikroTik. Aplikasi ini memungkinkan administrasi jarak jauh router MikroTik melalui jaringan dengan antarmuka grafis yang mudah digunakan.</p>
         </div>
         
-        <p>Catatan: selalu gunakan passphrase minimal 12 karakter dengan kombinasi huruf besar, huruf kecil, angka, dan simbol untuk mencegah serangan brute force.</p>
+        <p>Dari sumber MikroTik Documentation (2024), menu Wireless di Winbox berisi beberapa tab penting: Interfaces (untuk konfigurasi interface wireless), Security Profiles (untuk pengaturan keamanan), Registration (untuk melihat klien yang terhubung), dan Access List (untuk pengaturan MAC filtering). Untuk mengonfigurasi security profile WPA2, Anda perlu memilih tab Security Profiles terlebih dahulu.</p>
 
-        <h3 class="subsection-title">Melihat Detail Security Profile (Winbox)</h3>
-        <p>Untuk melihat detail profile yang telah dibuat:</p>
+        <h3 class="subsection-title">Membuat Security Profile WPA2 Baru</h3>
+        <p>Dari sumber ShellHacks (2022), proses pembuatan security profile WPA2 melalui Winbox melibatkan beberapa langkah penting. Berikut adalah panduan langkah demi langkah:</p>
+        
         <div class="code-terminal">
-            <div class="code-line comment"># Cara melihat detail Security Profile via Winbox</div>
-            <div class="code-line">1. Winbox -> Wireless -> Security Profiles tab.</div>
-            <div class="code-line">2. Pilih profile yang ingin dilihat, lalu klik <strong>Inspect</strong> atau <strong>Double-click</strong> untuk membuka detail.</div>
-            <div class="code-line">3. Periksa pengaturan seperti <em>authentication-types</em>, <em>unicast-ciphers</em>, <em>group-ciphers</em>, dan <em>group-key-update</em>.</div>
+            <div class="code-line comment"># Langkah-langkah membuat security profile WPA2 melalui Winbox</div>
+            <div class="code-line">1. Buka Winbox dan hubungkan ke router MikroTik.</div>
+            <div class="code-line">2. Klik menu <strong>Wireless</strong> di sidebar kiri.</div>
+            <div class="code-line">3. Pilih tab <strong>Security Profiles</strong>.</div>
+            <div class="code-line">4. Klik tombol <strong>+</strong> (plus) di bagian atas untuk menambahkan profile baru.</div>
+            <div class="code-line">5. Pada jendela yang muncul, isi kolom <strong>Name</strong> dengan nama profile (misalnya "profile-wpa2").</div>
+            <div class="code-line">6. Pada dropdown <strong>Mode</strong>, pilih <strong>dynamic-keys</strong>.</div>
+            <div class="code-line">7. Pada bagian <strong>Authentication Types</strong>, centang opsi <strong>WPA2 PSK</strong>.</div>
+            <div class="code-line">8. Masukkan password yang kuat pada kolom <strong>WPA2 Pre-Shared Key</strong>.</div>
+            <div class="code-line">9. Klik <strong>OK</strong> untuk menyimpan security profile.</div>
+        </div>
+        
+        <div class="image-container">
+            <img src="no (2).png" alt="Konfigurasi WPA2 di Winbox">
+            <div class="image-caption">Jendela konfigurasi Security Profile WPA2 di Winbox</div>
+        </div>
+        
+        <p>Dari sumber RouterOS First Time Configuration (2023), konfigurasi security profile yang lebih aman melibatkan pengaturan parameter enkripsi yang tepat. Berikut adalah konfigurasi yang direkomendasikan:</p>
+
+        <h3 class="subsection-title">Pengaturan Lanjutan Security Profile WPA2</h3>
+        <div class="code-terminal">
+            <div class="code-line comment"># Pengaturan lanjutan security profile WPA2 melalui Winbox</div>
+            <div class="code-line">1. Pada jendela Add Security Profile, pastikan <strong>Name</strong> dan <strong>Mode</strong> sudah diisi.</div>
+            <div class="code-line">2. Untuk <strong>Unicast Ciphers</strong>, pilih hanya <strong>aes-ccm</strong> (hapus centang pada tkip).</div>
+            <div class="code-line">3. Untuk <strong>Group Ciphers</strong>, pilih hanya <strong>aes-ccm</strong> (hapus centang pada tkip).</div>
+            <div class="code-line">4. Pastikan <strong>WPA2 Pre-Shared Key</strong> berisi password yang kuat (minimal 12 karakter).</div>
+            <div class="code-line">5. Pada <strong>Group Key Update</strong>, atur ke <strong>5m</strong> (5 menit) untuk rotasi kunci secara teratur.</div>
+            <div class="code-line">6. Aktifkan <strong>Management Protection</strong> dengan memilih <strong>required</strong> untuk mencegah serangan deauthentication.</div>
+            <div class="code-line">7. Untuk <strong>WPS Mode</strong>, pilih <strong>disabled</strong> untuk menghindari kerentanan WPS.</div>
+            <div class="code-line">8. Klik <strong>OK</strong> untuk menyimpan konfigurasi.</div>
+        </div>
+
+        <div class="security-alert">
+            <p>Menggunakan hanya aes-ccm (AES) untuk Unicast Ciphers dan Group Ciphers sangat penting karena algoritma TKIP memiliki kelemahan keamanan yang diketahui. AES menyediakan enkripsi yang jauh lebih kuat dan aman. Pastikan untuk menonaktifkan WPS (Wi-Fi Protected Setup) karena dapat dieksploitasi melalui serangan brute force.</p>
         </div>
 
         <div class="conclusion-box">
-            <p>Pembuatan security profile WPA2 di Winbox menawarkan antarmuka grafis yang mudah diikuti — semua parameter penting (mode, authentication types, cipher, pre-shared-key, management protection) dapat diatur tanpa perlu mengetik perintah CLI.</p>
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa konfigurasi security profile WPA2 melalui Winbox adalah proses yang mudah namun penting untuk keamanan jaringan wireless. Menggunakan mode dynamic-keys dengan authentication-types WPA2-PSK dan cipher AES-CCMP, serta menerapkan praktik terbaik seperti rotasi kunci teratur dan menonaktifkan WPS, memberikan tingkat keamanan yang optimal untuk jaringan wireless MikroTik.</p>
         </div>
     </div>
 
@@ -898,110 +927,166 @@ user-drag: none;
     <div class="section fade-in">
         <h2 class="section-title">3. MENERAPKAN SECURITY PROFILE KE INTERFACE WIRELESS</h2>
 
-                                                                <div class="image-container">
-          <img src="no (3).png" alt="SERVICE IP pada MikroTik RouterOS">
-          <div class="image-caption">Tampilan topologi di gns3</div>
-        </div>
-
-        <h3 class="subsection-title">Konfigurasi Interface Wireless melalui Winbox (Step-by-step)</h3>
-        <p>Langkah-langkah berikut menunjukkan bagaimana menerapkan security profile WPA2 yang telah dibuat ke interface wireless (mis. wlan1) menggunakan Winbox.</p>
-
-        <div class="code-terminal">
-            <div class="code-line comment"># Langkah-langkah menerapkan security profile ke interface WLAN (Winbox)</div>
-            <div class="code-line">1. Winbox -> Wireless -> tab <strong>Interfaces</strong>.</div>
-            <div class="code-line">2. Cari interface wireless yang akan dikonfigurasi (mis. <em>wlan1</em>), lalu <strong>double-click</strong> pada baris interface tersebut.</div>
-            <div class="code-line">3. Pada jendela properti interface, buka tab <strong>Wireless</strong>.</div>
-            <div class="code-line">4. Atur parameter: <em>Mode</em> = <strong>ap-bridge</strong>, <em>SSID</em> = <strong>MikroTik-Secure</strong>, <em>Band</em> = <strong>2ghz-b/g/n</strong>, <em>Channel Width</em> = <strong>20/40mhz-Ce</strong>, <em>Frequency</em> = <strong>auto</strong>.</div>
-            <div class="code-line">5. Pada dropdown <strong>Security Profile</strong>, pilih profile WPA2 yang sudah dibuat (mis. <em>profile-wpa2</em>).</div>
-            <div class="code-line">6. Centang atau pastikan <strong>Enabled</strong> agar interface aktif.</div>
-            <div class="code-line">7. Klik <strong>OK</strong> untuk menyimpan konfigurasi interface.</div>
-        </div>
-
-        <h3 class="subsection-title">Verifikasi Penerapan (Winbox)</h3>
-        <p>Berikut cara memeriksa bahwa security profile telah diterapkan dengan benar:</p>
-        <div class="code-terminal">
-            <div class="code-line comment"># Cara verifikasi penerapan via Winbox</div>
-            <div class="code-line">1. Winbox -> Wireless -> Interfaces: pastikan kolom <em>security-profile</em> pada baris <em>wlan1</em> menunjukkan nama profile yang dipilih dan status <em>Running</em> (ditandai R).</div>
-            <div class="code-line">2. Winbox -> Wireless -> Registration (Registration Table): lihat daftar klien yang terhubung (MAC, signal, tx-rate).</div>
-            <div class="code-line">3. Winbox -> Logs (gunakan filter atau cari topik berkaitan <em>wireless</em>) untuk melihat peristiwa autentikasi dan error.</div>
-        </div>
-
-        <div class="conclusion-box">
-            <p>Penerapan security profile ke interface wireless melalui Winbox mudah dan visual — Anda dapat langsung melihat dan mengubah parameter interface tanpa harus menggunakan perintah CLI.</p>
-        </div>
-    </div>
-
-    <!-- Section: Pengujian dan Praktik Keamanan Terbaik -->
-    <div class="section fade-in">
-        <h2 class="section-title">4. PENGUJIAN DAN PRAKTIK KEAMANAN TERBAIK</h2>
-
-                                                        <div class="image-container">
-          <img src="no (2).png" alt="SERVICE IP pada MikroTik RouterOS">
-          <div class="image-caption">Tampilan topologi di gns3</div>
-        </div>
-
-        <h3 class="subsection-title">Pengujian Konfigurasi WPA2 (Winbox)</h3>
-        <p>Uji konfigurasi WPA2 menggunakan antarmuka Winbox dengan langkah-langkah berikut:</p>
+        <h3 class="subsection-title">Mengkonfigurasi Interface Wireless dengan Security Profile</h3>
+        <p>Dari sumber MikroTik Documentation (2024), setelah membuat security profile, langkah selanjutnya adalah menerapkannya ke interface wireless. Penerapan ini dilakukan melalui Winbox dengan mengkonfigurasi interface wireless dan memilih security profile yang telah dibuat. Proses ini berfokus pada pengaturan interface wireless menjadi access point (AP) dengan keamanan WPA2.</p>
         
         <div class="code-terminal">
-            <div class="code-line comment"># Langkah-langkah pengujian via Winbox</div>
-            <div class="code-line">1. Winbox -> Wireless -> Security Profiles: pastikan profile terlihat dan konfigurasi sesuai.</div>
-            <div class="code-line">2. Winbox -> Wireless -> Interfaces: cek bahwa <em>wlan1</em> sudah memakai security profile yang benar dan statusnya berjalan.</div>
-            <div class="code-line">3. Winbox -> Wireless -> Registration: sambungkan perangkat klien (laptop/smartphone) dan periksa apakah klien muncul di daftar dengan enkripsi aktif.</div>
-            <div class="code-line">4. Winbox -> Wireless -> klik tombol <strong>Scan</strong> pada interface untuk memeriksa interferensi kanal dan melihat SSID lain di area.</div>
-            <div class="code-line">5. Winbox -> Logs: cek log untuk peristiwa autentikasi, deauth, atau error terkait wireless.</div>
-            <div class="code-line">6. Untuk monitoring trafik singkat: Winbox -> Interfaces -> pilih <em>wlan1</em> -> klik <strong>Traffic</strong> (atau gunakan Tools -> Torch untuk analisis lebih lanjut).</div>
+            <div class="code-line comment"># Langkah-langkah menerapkan security profile ke interface wireless melalui Winbox</div>
+            <div class="code-line">1. Di Winbox, klik menu <strong>Wireless</strong> di sidebar.</div>
+            <div class="code-line">2. Pilih tab <strong>Interfaces</strong>.</div>
+            <div class="code-line">3. Double-klik pada interface wireless (misalnya wlan1) yang ingin dikonfigurasi.</div>
+            <div class="code-line">4. Pada tab <strong>Wireless</strong>, lakukan pengaturan sebagai berikut:</div>
+            <div class="code-line">   - <strong>Mode</strong>: pilih <strong>ap bridge</strong> (access point bridge)</div>
+            <div class="code-line">   - <strong>Band</strong>: pilih sesuai hardware (misalnya 2GHz-B/G/N)</div>
+            <div class="code-line">   - <strong>Channel Width</strong>: pilih sesuai kebutuhan (misalnya 20/40MHz Ce)</div>
+            <div class="code-line">   - <strong>Frequency</strong>: pilih auto atau kanal spesifik</div>
+            <div class="code-line">   - <strong>SSID</strong>: masukkan nama jaringan wireless yang diinginkan</div>
+            <div class="code-line">   - <strong>Security Profile</strong>: pilih profile WPA2 yang telah dibuat sebelumnya</div>
+            <div class="code-line">5. Klik tab <strong>Advanced</strong> untuk pengaturan tambahan (opsional).</div>
+            <div class="code-line">6. Klik <strong>OK</strong> untuk menyimpan konfigurasi.</div>
+            <div class="code-line">7. Pastikan interface wireless tidak di-disable (tidak ada tanda X di samping interface).</div>
         </div>
-
-        <h3 class="subsection-title">Praktik Keamanan Terbaik untuk WPA2 (Winbox)</h3>
-        <p>Berikut praktik terbaik yang dapat langsung diterapkan lewat Winbox:</p>
-        <ol>
-            <li>Gunakan password yang kuat dan panjang (minimal 12 karakter) dengan kombinasi huruf besar, huruf kecil, angka, dan simbol</li>
-            <li>Aktifkan <strong>Management Protection</strong> (set ke <em>required</em> jika memungkinkan) untuk mencegah serangan deauthentication</li>
-            <li>Gunakan <strong>Unicast Ciphers</strong> dan <strong>Group Ciphers</strong> = <em>aes-ccm</em> saja; hindari TKIP</li>
-            <li>Perbarui firmware RouterOS secara berkala untuk mendapatkan perbaikan keamanan terbaru</li>
-            <li>Atur <strong>Group Key Update</strong> ke nilai yang tepat (mis. 5 menit) untuk mengurangi risiko key reuse</li>
-        </ol>
-
-        <div class="code-terminal">
-            <div class="code-line comment"># Contoh konfigurasi security profile (Winbox) dengan praktik terbaik</div>
-            <div class="code-line">1. Winbox -> Wireless -> Security Profiles -> + (Add)</div>
-            <div class="code-line">2. Name: <em>best-practice</em></div>
-            <div class="code-line">3. Mode: <em>dynamic-keys</em></div>
-            <div class="code-line">4. Authentication Types: <em>WPA2 PSK</em></div>
-            <div class="code-line">5. Unicast Ciphers: <em>aes-ccm</em></div>
-            <div class="code-line">6. Group Ciphers: <em>aes-ccm</em></div>
-            <div class="code-line">7. WPA2 Pre-Shared Key: <em>V3ryStr0ngP@ssw0rd!</em> (ganti dengan passphrase Anda)</div>
-            <div class="code-line">8. Group Key Update: <em>5m</em></div>
-            <div class="code-line">9. Management Protection: <em>required</em></div>
-            <div class="code-line">10. WPS Mode: <em>disabled</em></div>
-            <div class="code-line">11. Klik <strong>OK</strong></div>
-        </div>
-
-        <p>Jika perangkat klien dan RouterOS mendukung, pertimbangkan juga menyusun <strong>Security Profile</strong> untuk mode transisi WPA2/WPA3 melalui Winbox:</p>
-
-        <div class="code-terminal">
-            <div class="code-line comment"># Mode transisi WPA2/WPA3 (Winbox, RouterOS v7+ dengan wifiwave2)</div>
-            <div class="code-line">1. Winbox -> Wireless -> Security Profiles -> + (Add)</div>
-            <div class="code-line">2. Name: <em>transition-mode</em></div>
-            <div class="code-line">3. Mode: <em>dynamic-keys</em></div>
-            <div class="code-line">4. Authentication Types: centang <em>WPA2 PSK</em> dan <em>WPA3 PSK</em> jika tersedia</div>
-            <div class="code-line">5. Unicast Ciphers / Group Ciphers: <em>aes-ccm</em></div>
-            <div class="code-line">6. Masukkan kedua passphrase pada kolom WPA2 / WPA3 Pre-Shared Key (atau gunakan passphrase yang sama jika diperlukan)</div>
-            <div class="code-line">7. Management Protection: <em>required</em>, WPS Mode: <em>disabled</em></div>
-            <div class="code-line">8. Klik <strong>OK</strong></div>
-        </div>
-
+        
         <div class="tech-alert">
-            <p>Untuk RouterOS versi 7 ke atas, konfigurasi wireless pada package wifiwave2 menggunakan path antarmuka yang sedikit berbeda di Winbox — namun konsep pengaturan security profile, authentication-types, encryption, dan passphrase tetap sama.</p>
+            <p>Mode "ap bridge" adalah mode yang paling umum digunakan untuk access point. Mode ini memungkinkan komunikasi antar klien wireless dan memungkinkan bridging ke jaringan kabel. Mode lain termasuk "station" (untuk menjadi klien dari AP lain) dan "station-wds" (untuk koneksi point-to-point).</p>
+        </div>
+        
+        <p>Dari sumber Go Wireless NZ (2023), pengaturan tambahan pada tab Advanced dapat meningkatkan performa dan keamanan jaringan wireless. Beberapa pengaturan penting termasuk:</p>
+
+        <h3 class="subsection-title">Pengaturan Advanced untuk Interface Wireless</h3>
+        <div class="code-terminal">
+            <div class="code-line comment"># Pengaturan lanjutan untuk interface wireless di tab Advanced</div>
+            <div class="code-line">1. <strong>Distance</strong>: atur sesuai jarak maksimum klien (misalnya "indoors" untuk penggunaan dalam ruangan).</div>
+            <div class="code-line">2. <strong>TX Power</strong>: sesuaikan kekuatan transmisi (default=auto, gunakan nilai lebih rendah untuk area kecil).</div>
+            <div class="code-line">3. <strong>Data Rates</strong>: untuk jaringan yang optimal, atur "Supported" dan "Basic" rates sesuai kebutuhan.</div>
+            <div class="code-line">4. <strong>HT (High Throughput)</strong>: aktifkan untuk performa terbaik dengan perangkat 802.11n/ac.</div>
+            <div class="code-line">5. <strong>Country</strong>: pilih sesuai lokasi Anda untuk mematuhi regulasi spektrum lokal.</div>
+            <div class="code-line">6. <strong>Hide SSID</strong>: aktifkan jika ingin menyembunyikan nama jaringan (tidak tampil di daftar scan).</div>
+            <div class="code-line">7. <strong>WMM Support</strong>: biarkan aktif untuk Quality of Service pada trafik wireless.</div>
+            <div class="code-line">8. <strong>Default Authentication</strong>: pastikan diatur ke "yes".</div>
+            <div class="code-line">9. <strong>Default Forward</strong>: biasanya diatur ke "yes" untuk memungkinkan komunikasi antar klien.</div>
+        </div>
+
+        <h3 class="subsection-title">Verifikasi Konfigurasi Interface Wireless</h3>
+        <p>Dari sumber NetworkLessons (2023), setelah menerapkan security profile dan mengonfigurasi interface wireless, penting untuk memverifikasi bahwa konfigurasi telah diterapkan dengan benar dan interface berjalan dengan baik. Verifikasi dapat dilakukan melalui Winbox dengan beberapa cara:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line comment"># Cara memverifikasi konfigurasi interface wireless melalui Winbox</div>
+            <div class="code-line">1. Di menu <strong>Wireless > Interfaces</strong>, periksa status interface (harus ada tanda R untuk Running).</div>
+            <div class="code-line">2. Klik <strong>Registration</strong> untuk melihat daftar klien yang terhubung.</div>
+            <div class="code-line">3. Di menu <strong>Interfaces</strong> (bukan di Wireless), cari interface wireless dan periksa statistik trafik.</div>
+            <div class="code-line">4. Pilih interface dan klik <strong>Monitor Traffic</strong> untuk melihat grafik trafik real-time.</div>
+            <div class="code-line">5. Di menu <strong>Tools > Torch</strong>, pilih interface wireless dan klik <strong>Start</strong> untuk analisis paket.</div>
+            <div class="code-line">6. Di menu <strong>Log</strong>, cari entries yang terkait dengan wireless untuk melihat aktivitas autentikasi.</div>
         </div>
 
         <div class="security-alert">
-            <p>Meskipun WPA2 masih aman jika dikonfigurasi dengan benar, WPA2 memiliki kelemahan seperti kerentanan KRACK (Key Reinstallation Attack). Pertimbangkan beralih ke WPA3 jika perangkat klien Anda mendukungnya, terutama untuk jaringan yang menangani data sensitif.</p>
+            <p>Jika interface wireless tidak aktif (tidak ada tanda R), periksa apakah interface tersebut disabled. Klik kanan pada interface dan pilih "Enable" jika perlu. Juga pastikan bahwa hardware wireless diaktifkan di perangkat MikroTik Anda melalui menu System > Routerboard > Settings.</p>
         </div>
 
         <div class="conclusion-box">
-            <p>Pengujian dan penerapan praktik keamanan terbaik melalui Winbox memungkinkan administrator untuk mengelola konfigurasi secara visual dan cepat. Pastikan untuk melakukan verifikasi, monitoring, dan memperbarui firmware secara berkala.</p>
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa penerapan security profile WPA2 ke interface wireless melalui Winbox adalah proses yang melibatkan konfigurasi mode, band, SSID, dan pemilihan security profile yang tepat. Pengaturan lanjutan dapat dioptimalkan sesuai dengan kebutuhan spesifik jaringan. Verifikasi konfigurasi penting untuk memastikan bahwa interface wireless berjalan dengan baik dan menggunakan pengaturan keamanan yang telah dikonfigurasi.</p>
+        </div>
+    </div>
+
+    <!-- Section: Detail Opsi Enkripsi dan Praktik Keamanan Terbaik -->
+    <div class="section fade-in">
+        <h2 class="section-title">4. DETAIL OPSI ENKRIPSI DAN PRAKTIK KEAMANAN TERBAIK</h2>
+
+        <h3 class="subsection-title">Detail Opsi Enkripsi Unicast dan Group Ciphers</h3>
+        <p>Dari sumber TechTarget (2024), pada konfigurasi security profile WPA2 MikroTik, terdapat dua jenis enkripsi yang perlu dipahami: Unicast Ciphers dan Group Ciphers. Unicast Ciphers digunakan untuk mengenkripsi komunikasi individual antara access point dan klien tertentu, sementara Group Ciphers digunakan untuk lalu lintas broadcast dan multicast yang dikirim ke beberapa klien sekaligus.</p>
+        
+        <p>Berikut detail dari opsi cipher yang tersedia:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line comment"># Detail Opsi Cipher pada Security Profile MikroTik</div>
+            <div class="code-line"><strong>1. aes-ccm (AES-CCMP):</strong></div>
+            <div class="code-line">   - Advanced Encryption Standard dengan Counter Mode CBC-MAC Protocol</div>
+            <div class="code-line">   - Algoritma enkripsi terkuat yang tersedia untuk WPA2</div>
+            <div class="code-line">   - Menggunakan kunci 128-bit</div>
+            <div class="code-line">   - Menyediakan confidentiality, integrity, dan authentication</div>
+            <div class="code-line">   - <strong>Rekomendasi:</strong> Gunakan untuk Unicast dan Group Ciphers</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>2. tkip (TKIP):</strong></div>
+            <div class="code-line">   - Temporal Key Integrity Protocol</div>
+            <div class="code-line">   - Digunakan pada WPA asli sebagai pengganti WEP</div>
+            <div class="code-line">   - Menggunakan algoritma RC4 dengan beberapa perbaikan</div>
+            <div class="code-line">   - Memiliki kelemahan keamanan yang diketahui</div>
+            <div class="code-line">   - <strong>Rekomendasi:</strong> Hindari penggunaan, kecuali diperlukan untuk perangkat lama</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>3. tkip-aes (Mixed Mode):</strong></div>
+            <div class="code-line">   - Kombinasi TKIP dan AES untuk kompatibilitas maksimum</div>
+            <div class="code-line">   - Memungkinkan perangkat AES dan TKIP terhubung ke jaringan yang sama</div>
+            <div class="code-line">   - Kelemahan: Keamanan jaringan diturunkan ke level TKIP</div>
+            <div class="code-line">   - <strong>Rekomendasi:</strong> Hindari jika memungkinkan, gunakan hanya untuk transisi</div>
+        </div>
+        
+        <p>Dari sumber Strong.eu Blog (2023), parameter keamanan lain pada security profile MikroTik juga perlu diperhatikan untuk meningkatkan keamanan jaringan wireless:</p>
+
+        <h3 class="subsection-title">Parameter Keamanan Tambahan</h3>
+        <div class="code-terminal">
+            <div class="code-line comment"># Parameter Keamanan Tambahan pada Security Profile</div>
+            <div class="code-line"><strong>1. Management Protection:</strong></div>
+            <div class="code-line">   - <strong>disabled:</strong> Tidak ada perlindungan untuk frame manajemen (default)</div>
+            <div class="code-line">   - <strong>allowed:</strong> Mendukung perlindungan tapi tidak memerlukan</div>
+            <div class="code-line">   - <strong>required:</strong> Mengharuskan perlindungan frame manajemen</div>
+            <div class="code-line">   - Mencegah serangan deauthentication/disassociation</div>
+            <div class="code-line">   - <strong>Rekomendasi:</strong> Gunakan "required" jika semua klien mendukung</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>2. Group Key Update:</strong></div>
+            <div class="code-line">   - Interval pembaruan kunci group (broadcast/multicast)</div>
+            <div class="code-line">   - Default: 5 menit (5m)</div>
+            <div class="code-line">   - Nilai yang lebih rendah = keamanan lebih tinggi tapi overhead lebih besar</div>
+            <div class="code-line">   - <strong>Rekomendasi:</strong> 5-30 menit tergantung tingkat keamanan yang diinginkan</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>3. WPS Mode:</strong></div>
+            <div class="code-line">   - Wi-Fi Protected Setup untuk koneksi mudah</div>
+            <div class="code-line">   - Opsi: disabled, push button, PIN</div>
+            <div class="code-line">   - Memiliki kerentanan keamanan yang diketahui</div>
+            <div class="code-line">   - <strong>Rekomendasi:</strong> Selalu gunakan "disabled" untuk keamanan maksimal</div>
+        </div>
+
+        <h3 class="subsection-title">Praktik Keamanan Terbaik untuk WPA2</h3>
+        <p>Dari sumber Meraki Documentation (2020), berikut adalah praktik keamanan terbaik untuk mengoptimalkan keamanan WPA2 pada MikroTik:</p>
+        
+        <div class="code-terminal">
+            <div class="code-line comment"># Praktik Keamanan Terbaik untuk WPA2 pada MikroTik</div>
+            <div class="code-line"><strong>1. Password (Pre-Shared Key):</strong></div>
+            <div class="code-line">   - Gunakan password minimal 12 karakter</div>
+            <div class="code-line">   - Kombinasikan huruf besar, huruf kecil, angka, dan simbol</div>
+            <div class="code-line">   - Hindari kata kamus, tanggal lahir, atau informasi pribadi lainnya</div>
+            <div class="code-line">   - Ganti password secara berkala (misalnya setiap 3-6 bulan)</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>2. Enkripsi:</strong></div>
+            <div class="code-line">   - Gunakan hanya AES-CCMP untuk Unicast dan Group Ciphers</div>
+            <div class="code-line">   - Nonaktifkan TKIP sepenuhnya jika memungkinkan</div>
+            <div class="code-line">   - Pertimbangkan WPA3 jika router dan perangkat mendukung</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>3. Perlindungan Frame Manajemen:</strong></div>
+            <div class="code-line">   - Aktifkan Management Protection (required) jika semua klien mendukung</div>
+            <div class="code-line">   - Ini mencegah serangan deauthentication yang umum</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>4. SSID:</strong></div>
+            <div class="code-line">   - Hindari nama SSID default atau yang menunjukkan informasi sensitif</div>
+            <div class="code-line">   - Pertimbangkan untuk mengaktifkan Hide SSID (meski bukan sebagai mekanisme keamanan utama)</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>5. Pembaruan Firmware:</strong></div>
+            <div class="code-line">   - Perbarui RouterOS secara teratur untuk mendapatkan perbaikan keamanan</div>
+            <div class="code-line">   - Periksa situs MikroTik untuk peringatan keamanan</div>
+            <div class="code-line"></div>
+            <div class="code-line"><strong>6. Fitur Tambahan:</strong></div>
+            <div class="code-line">   - Nonaktifkan WPS sepenuhnya</div>
+            <div class="code-line">   - Pertimbangkan MAC filtering sebagai lapisan keamanan tambahan</div>
+            <div class="code-line">   - Implementasikan VLAN untuk isolasi jaringan jika diperlukan</div>
+            <div class="code-line">   - Gunakan Firewall untuk membatasi akses dari klien wireless</div>
+        </div>
+
+        <div class="security-alert">
+            <p>Meskipun WPA2 dengan AES-CCMP masih cukup aman untuk sebagian besar penggunaan, serangan KRACK (Key Reinstallation Attack) yang ditemukan pada tahun 2017 dapat mengeksploitasi kelemahan dalam implementasi WPA2. Pastikan firmware router Anda selalu diperbarui untuk mendapatkan perbaikan keamanan. Jika memungkinkan, pertimbangkan untuk beralih ke WPA3 yang menawarkan perlindungan yang lebih baik terhadap serangan brute force dan menyediakan Perfect Forward Secrecy.</p>
+        </div>
+
+        <div class="conclusion-box">
+            <p>Dari 2 pendapat tersebut dapat disimpulkan bahwa penggunaan AES-CCMP sebagai satu-satunya cipher untuk unicast dan group communications merupakan praktik terbaik dalam mengonfigurasi WPA2. Pengaturan tambahan seperti management protection, pembaruan grup key secara teratur, dan penonaktifan WPS sangat meningkatkan keamanan jaringan wireless. Kombinasi password yang kuat, pengaturan enkripsi yang tepat, dan pembaruan firmware secara teratur membentuk pendekatan keamanan berlapis yang efektif untuk melindungi jaringan wireless MikroTik.</p>
         </div>
     </div>
 
@@ -1017,13 +1102,11 @@ user-drag: none;
             
             <li><strong>CBT Nuggets.</strong> 2023. <em>What are Encryption Standards? WPA & WPA2</em>. https://www.cbtnuggets.com/blog/technology/security/what-are-encryption-standards-WPA-WPA2. Diakses pada 12 September 2025, pukul 09:55 WIB.</li>
 
-            <li><strong>Garrett's Mindless Rambling.</strong> 2022. <em>MikroTik Wireless Security WPA/WPA2 Profile</em>. https://grohler.com/mikrotik-wireless-security-wpa-wpa2-profile/. Diakses pada 12 September 2025, pukul 10:30 WIB.</li>
-
-            <li><strong>ShellHacks.</strong> 2022. <em>MikroTik: WiFi Configuration - Simple Setup</em>. https://www.shellhacks.com/mikrotik-wifi-configuration-simple-setup/. Diakses pada 12 September 2025, pukul 11:05 WIB.</li>
-
             <li><strong>Go Wireless NZ.</strong> 2023. <em>Configuring a MikroTik router from start to finish</em>. https://help.gowifi.co.nz/support/solutions/articles/48001077268-beginners-guide-to-configuring-a-mikrotik-router-from-start-to-finish. Diakses pada 12 September 2025, pukul 11:40 WIB.</li>
 
             <li><strong>MikroTik Wiki.</strong> 2024. <em>Manual:Interface/Wireless</em>. https://wiki.mikrotik.com/wiki/Manual:Interface/Wireless. Diakses pada 12 September 2025, pukul 12:15 WIB.</li>
+
+            <li><strong>ShellHacks.</strong> 2022. <em>MikroTik: WiFi Configuration - Simple Setup</em>. https://www.shellhacks.com/mikrotik-wifi-configuration-simple-setup/. Diakses pada 12 September 2025, pukul 11:05 WIB.</li>
 
             <li><strong>RouterOS First Time Configuration.</strong> 2023. <em>First Time Configuration - RouterOS</em>. https://help.mikrotik.com/docs/spaces/ROS/pages/328151/First+Time+Configuration. Diakses pada 12 September 2025, pukul 12:50 WIB.</li>
 
@@ -1037,8 +1120,6 @@ user-drag: none;
         </ul>
     </div>
 </div>
-
-
 
 
 <script>
@@ -1240,3 +1321,4 @@ user-drag: none;
 </body>
 
 </html>
+
